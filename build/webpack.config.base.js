@@ -36,7 +36,8 @@ const generateConfig = env => ({
     filename: '[name]-[hash:5].js',
     chunkFilename: '[id].chunk.js',
     path: path.join(__dirname, '..', 'dist'),
-    publicPath: env === 'development' ? '/' : path.join(__dirname, '..', 'dist/')
+    // publicPath: env === 'development' ? '/' : path.join(__dirname, '..', 'dist/')
+    publicPath: env === 'development' ? '/' : '/school-zq/'
   },
   resolve: {
     alias: {
@@ -46,15 +47,15 @@ const generateConfig = env => ({
   },
   module: {
     rules: [
-      {
-        test: /\.(jsx|js)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [path.resolve('src'), path.resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
+      // {
+      //   test: /\.(jsx|js)$/,
+      //   loader: 'eslint-loader',
+      //   enforce: 'pre',
+      //   include: [path.resolve('src'), path.resolve('test')],
+      //   options: {
+      //     formatter: require('eslint-friendly-formatter')
+      //   }
+      // },
       { test: /\.(jsx|js)$/, exclude: /node_modules/, loader: 'babel-loader' },
       { test: /\.(png|gif|jpg|jpeg|bmp)$/i, exclude: /node_modules/, loader: "url-loader?limit=8192" },
       {
@@ -75,6 +76,20 @@ const generateConfig = env => ({
           // { loader: 'style-loader' },
           { loader: 'css-loader' },
           { loader: 'postcss-loader', options: postcssOpts }
+        ]
+      },
+      {
+        test: /\.(eot|woff2?|ttf|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              name: "[name]-[hash:5].min.[ext]",
+              limit: 5000, // fonts file size <= 5KB, use 'base64'; else, output svg file
+              publicPath: "fonts/",
+              outputPath: "fonts/"
+            }
+          }
         ]
       }
     ]

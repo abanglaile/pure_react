@@ -17,7 +17,7 @@ class ReduxBook extends React.Component {
 
 export default connect(
   (state) => ({
-    prop: state.demoReducer.toJS().json.prop
+    prop: state.demoReducer.toJS().json.propprop
   }),
   (dispatch) => ({
     onClick: () => {
