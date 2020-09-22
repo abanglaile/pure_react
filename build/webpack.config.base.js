@@ -71,6 +71,7 @@ const generateConfig = env => ({
       },
       {
         test: /\.css$/,
+        // include: /node_modules|antd\.css/,
         use: [
           miniCssExtractPlugin.loader,
           // { loader: 'style-loader' },
