@@ -44,7 +44,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "neo-async": "^2.6.0",
     "node-libs-browser": "^2.2.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.14.1",
     "open-browser-webpack-plugin": "^0.0.5",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",

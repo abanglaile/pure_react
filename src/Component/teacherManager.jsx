@@ -63,7 +63,7 @@ class teacherManager extends React.Component{
                                                 <div style={{width:320}}>{item.group.map((g_item) => <span>{g_item.group_id}:{g_item.group_name},&nbsp;</span>)}</div>
                                             }
                                         >
-                                            <span>负责<span style={{fontSize:'1rem',color:'#597ef7'}}>{item.group.length}</span>个班组</span>
+                                            <span>带<span style={{fontSize:'1rem',color:'#597ef7'}}>{item.group.length}</span>个班组</span>
                                         </Popover>
                                     }
                                 />
