@@ -182,10 +182,11 @@ export const searchStuName = (input) => {
   }
 }
 
-export const getGroupByStuid = (userid) => {
-  let url = target + "/getMyStuGroupData";
+export const getStuGroup = (userid,school_id) => {
+  let url = target + "/getMyStuGroupData2";
+  console.log("school_id:",school_id);
   return dispatch => {
-      return axios.get(url, {params: {userid}})
+      return axios.get(url, {params: {userid,school_id}})
       .then(function (response) {
           dispatch({
               type : 'GET_STU_GROUP',

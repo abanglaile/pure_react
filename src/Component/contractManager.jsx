@@ -137,7 +137,7 @@ class contractManager extends React.Component{
                         filterOption={false}
                         autoFocus={true}
                         onSearch={(input) => this.searchStuName(input)}
-                        onSelect={(value, option) => {this.setState({student_id: value});this.props.getGroupByStuid(value);}}
+                        onSelect={(value, option) => {this.setState({student_id: value});this.props.getStuGroup(value,this.state.school_id);}}
                         notFoundContent={null}
                     >
                         {student_options}  
