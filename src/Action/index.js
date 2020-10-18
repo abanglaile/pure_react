@@ -113,6 +113,17 @@ export const updateGroupTeacher = ( school_id, selected_teacher, group_id, index
   }
 }
 
+export const changGroupSta = (school_id,group_id,group_state) => {
+  let url = target + '/changGroupState'
+  return (dispatch) => {
+    return axios.post(url, { group_id, group_state })
+    .then((response) => {
+      dispatch(getGroupTable(school_id));
+      // message.success('分组停用成功！');
+    })
+  }
+}
+
 export const updateGroupHour = (stu_group_id, student_id, num, index, label, school_id) => {
   let url = target + '/updateGroupHour'
   return (dispatch) => {

@@ -38,6 +38,7 @@ class App extends React.Component {
           >
             <Menu.Item key="1">喜悦-海珠分校</Menu.Item>
             <Menu.Item key="3">喜悦-越秀分校</Menu.Item>
+            <Menu.Item key="4">喜悦-澳门分校</Menu.Item>
             {/* <Menu.Item key="2">星海附中</Menu.Item> */}
           </Menu>
         </Header>

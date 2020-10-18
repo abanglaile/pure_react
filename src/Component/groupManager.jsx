@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import *as action from '@/Action/index'
-import { Icon, Popconfirm, Button, Modal, Table, Input, Select, message  } from 'antd'
+import { Icon, Popconfirm, Button, Modal, Table, Input, Select, message, Switch  } from 'antd'
 import Highlighter from 'react-highlight-words';
 const Option = Select.Option;
 
@@ -138,6 +138,20 @@ class groupManager extends React.Component{
         this.setState({editingKey: '', selected_teacher : [], isOnChange: false});
     }
 
+    onSwitchChange(checked,school_id,group_id){
+        // console.log("checked: ",checked);
+        // console.log("school_id: ",school_id);
+        // console.log("group_id: ",group_id);
+        var group_new_state = checked? 0 : 1;
+        this.props.changGroupSta(school_id,group_id,group_new_state); 
+        // if(group_new_state){//group_new_state 1:停用  
+        //     this.props.changGroupSta(school_id,group_id,group_new_state); 
+        // }else{
+        //     message.warning('启用分组，请在后台配置！');
+        // }
+        
+    }
+
     selectCancel(){
         this.setState({editingKey: '', selected_teacher : [], isOnChange: false});
     }
@@ -158,7 +172,7 @@ class groupManager extends React.Component{
         }, {
             title: '分组名称',
             dataIndex: 'group_name',
-            width: '25%',
+            width: '22%',
             filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
                 <div style={{ padding: 8 }}>
                   <Input
@@ -208,11 +222,11 @@ class groupManager extends React.Component{
         }, {
             title: '科目',
             dataIndex: 'course_label_name',
-            width: '10%',
+            width: '8%',
         }, {
             title: '负责老师',
             dataIndex: 'teacher_group',
-            width: '35%',
+            width: '30%',
             render: (text, record, index) => {
                 // console.log("text:",JSON.stringify(text));
                 var { editingKey } = this.state;
@@ -240,6 +254,23 @@ class groupManager extends React.Component{
                                 {text.map(e => <span>{e.realname}&nbsp;&nbsp;</span>)}
                             </a>
                         )}
+                    </div>
+                );
+            },
+        },{
+            title: '分组状态',
+            dataIndex: 'group_state',
+            width: '10%',
+            render: (text, record,index) => {
+                return(
+                    <div>
+                        <Switch 
+                            checkedChildren="在用" 
+                            unCheckedChildren="停用" 
+                            checked={!text} 
+                            // onChange={() => this.props.changeGroupSta(this.state.school_id,record.group_id,text)}
+                            onChange={(e) => this.onSwitchChange(e,this.state.school_id,record.group_id)} 
+                        />
                     </div>
                 );
             },

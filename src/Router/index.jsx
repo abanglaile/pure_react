@@ -10,8 +10,8 @@ import roomManager from '@/Component/roomManager'
 import contractManager from '@/Component/contractManager'
 
 const routes = (
-  <Route path="school-zq" component={App}>
-  {/* <Route path="school-zq" component={requireAuthentication(App)}>  */}
+  // <Route path="school-zq" component={App}>
+  <Route path="school-zq" component={requireAuthentication(App)}>
     <IndexRoute component={teacherManager} />
     <Route path="teacher" component={teacherManager} />
     <Route path="group" component={groupManager} />
