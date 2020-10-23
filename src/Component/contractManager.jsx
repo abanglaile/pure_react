@@ -78,8 +78,8 @@ class contractManager extends React.Component{
         this.setState({timeVisible: true, stu_group_id: stu_group_id});
     }
 
-    onContractModal(stu_group_id){
-        this.props.getHistoryContract(stu_group_id);
+    onContractModal(stu_group_id, student_id){
+        this.props.getHistoryContract(stu_group_id, student_id);
         this.setState({hisVisible: true});
     }
 
@@ -435,7 +435,7 @@ class contractManager extends React.Component{
                 return(
                     <div>
                         <Tooltip placement="top" title={'id: '+ record.stu_group_id}>
-                            <a onClick={() => this.onContractModal(record.stu_group_id)}>{text}</a>
+                            <a onClick={() => this.onContractModal(record.stu_group_id,record.student_id)}>{text}</a>
                         </Tooltip>
                     </div>
                 );

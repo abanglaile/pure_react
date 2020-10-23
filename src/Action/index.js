@@ -225,10 +225,10 @@ export const addNewContract = (contract, school_id) => {
   }
 }
 
-export const getHistoryContract = (stu_group_id) => {
+export const getHistoryContract = (stu_group_id, student_id) => {
   let url = target + '/getHistoryContract'
   return (dispatch) => {
-    return axios.get(url, {params: {stu_group_id}})
+    return axios.get(url, {params: {stu_group_id,student_id}})
     .then((response) => {
       dispatch({
         type: 'GET_HISTORY_CONTRACT',
