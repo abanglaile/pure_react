@@ -141,7 +141,7 @@ export const updateGroupHour = (stu_group_id, student_id, num, index, label, sch
 }
 
 export const setSchoolId = (schoolId) => {
-  console.log("action schoolId:",schoolId);
+  // console.log("action schoolId:",schoolId);
   return {
      type: 'UPDATE_SCHOOL_ID',
      schoolId,
@@ -239,5 +239,97 @@ export const getHistoryContract = (stu_group_id, student_id) => {
     .catch(function (error) {
         console.log(error);
     });
+  }
+}
+
+export const getStudentDataBySchoolid = (schoolId) => {
+  let url = target + '/getStudentDataBySchoolid'
+  return (dispatch) => {
+    dispatch(getDataStart());
+    return axios.get(url, { params: { schoolId } })
+    .then((response) => {
+      dispatch({
+        type: 'GET_STUDENT_TABLE',
+        json: response.data
+      })
+    })
+  }
+}
+
+export const getStuInfoById = (student_id) => {
+  let path = "/getStuInfoById";
+  let url = target + path;
+  return dispatch => {
+      return axios.get(url,{
+          params:{
+              student_id,
+          }
+      })
+      .then(function (response) {
+          dispatch({
+              type : 'GET_STU_INFO_SUCESS',
+              json: response.data[0],
+          });
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
+  }
+}
+
+export const getStuCourse = (student_id) => {
+  let url = target + "/getStuCourse";
+  return dispatch => {
+      return axios.get(url, { 
+          params:{
+              student_id,
+      }})
+      .then(function (response) {
+          dispatch({
+              type : 'GET_STU_COURSE',
+              json: response.data,
+          });
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
+  }
+}
+
+export const getStuPfCommentList = (student_id) => {
+  let url = target + "/getStuPfCommentList";
+  return dispatch => {
+      dispatch(getDataStart());
+      return axios.get(url, { 
+          params:{
+              student_id,
+      }})
+      .then(function (response) {
+          dispatch({
+              type : 'GET_STU_PFCOMMENT_LIST',
+              json: response.data,
+          });
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
+  }
+}
+
+export const getStuKpCommentList = (student_id,filter_option) => {
+  let url = target + "/getStuKpCommentList";
+  // console.log("filter_option:",JSON.stringify(filter_option));
+  return dispatch => {
+      dispatch(getDataStart());
+      return axios.post(url, { student_id, filter_option})
+      .then(function (response) {
+          dispatch({
+              type : 'GET_STU_KPCOMMENT_LIST',
+              json: response.data,
+          });
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
   }
 }

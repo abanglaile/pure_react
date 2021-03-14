@@ -273,7 +273,7 @@ class contractManager extends React.Component{
                     </Form>
                 </div>
                 <div style={{marginTop:'10px'}}>
-                    共&nbsp;<span style={{color:'red'}}>{consumeLesson.length ? consumeLesson.length : 0}</span>&nbsp;节课，合计&nbsp;<span style={{color:'red'}}>{total_time}</span>&nbsp;分钟，<span style={{color:'red'}}>{(total_time/60).toFixed(1)}</span>&nbsp;小时
+                    共&nbsp;<span style={{color:'red'}}>{consumeLesson.length ? consumeLesson.length : 0}</span>&nbsp;节课，合计&nbsp;<span style={{color:'red'}}>{total_time}</span>&nbsp;分钟，<span style={{color:'red'}}>{(total_time/60).toFixed(2)}</span>&nbsp;小时
                 </div>
                 <List
                     itemLayout="horizontal"
@@ -349,8 +349,8 @@ class contractManager extends React.Component{
                                     <div>
                                         <span>合同金额：</span>
                                         <span style={{color:'red'}}>{item.fee}</span>元
-                                        <span style={{marginLeft:'20px'}}>导学：{(item.guide_min/60).toFixed(1)} 小时</span>
-                                        <span style={{marginLeft:'20px'}}>函授：{(item.class_min/60).toFixed(1)} 小时</span>
+                                        <span style={{marginLeft:'20px'}}>导学：{(item.guide_min/60).toFixed(2)} 小时</span>
+                                        <span style={{marginLeft:'20px'}}>函授：{(item.class_min/60).toFixed(2)} 小时</span>
                                     </div>
                                 }
                             />
@@ -391,8 +391,13 @@ class contractManager extends React.Component{
         ),
         filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
         onFilter: (value, record) => {
-            var indexs = record[dataIndex].indexOf(value);
-            return (indexs >= 0 ? true : false);
+            // console.log("record:",JSON.stringify(record));
+            if(record[dataIndex]){
+                var indexs = record[dataIndex].indexOf(value);
+                return (indexs >= 0 ? true : false);
+            }else{
+                return false;
+            }
         },
         onFilterDropdowntimeVisibleChange: (timeVisible) => {
             if (timeVisible) {
@@ -418,13 +423,17 @@ class contractManager extends React.Component{
             width: '4%',
             ...this.getColumnSearchProps('realname'),
             render: (text, record, index) => {
-                return(
-                    <div>
-                        <Popover content={this.props.code} title="邀请码" trigger="click">
-                            <a onClick={() => this.props.getCodeByStudentid(record.student_id)}>{text}</a>
-                        </Popover>
-                    </div>
-                );
+                if(text){
+                    return(
+                        <div>
+                            <Popover content={this.props.code} title="邀请码" trigger="click">
+                                <a onClick={() => this.props.getCodeByStudentid(record.student_id)}>{text}</a>
+                            </Popover>
+                        </div>
+                    );
+                }else{
+                    return '';
+                }
             },
         }, {
             title: '参与课程',
@@ -466,7 +475,7 @@ class contractManager extends React.Component{
                             // <a disabled={editingKey !== ''} onClick={() => this.setState({ editingKey: index, label: 'guide' })}>
                             //     <span>{(text/60).toFixed(1)}</span>
                             // </a>
-                            <span>{(text/60).toFixed(1)}</span>
+                            <span>{(text/60).toFixed(2)}</span>
                         )}
                     </div>
                 );
@@ -492,7 +501,7 @@ class contractManager extends React.Component{
                             // <a disabled={editingKey !== ''} onClick={() => this.setState({ editingKey: index, label: 'class' })}>
                             //     <span>{(text/60).toFixed(1)}</span>
                             // </a>
-                            <span>{(text/60).toFixed(1)}</span>
+                            <span>{(text/60).toFixed(2)}</span>
                         )}
                     </div>
                 );
@@ -505,7 +514,7 @@ class contractManager extends React.Component{
                 return(
                     <a onClick={() => {this.setState({label:'guide'});this.onGuideModal(record.stu_group_id)}}>
                         {/* {text} */}
-                        {(text/60).toFixed(1)}
+                        {(text/60).toFixed(2)}
                     </a>
                 );
             },
@@ -517,7 +526,7 @@ class contractManager extends React.Component{
                 return(
                     <a onClick={() => {this.setState({label:'class'});this.onClassModal(record.stu_group_id)}}>
                         {/* {text} */}
-                        {(text/60).toFixed(1)}
+                        {(text/60).toFixed(2)}
                     </a>
                 );
             },
@@ -529,7 +538,7 @@ class contractManager extends React.Component{
             render: (text, record, index) => {
                 return(
                     <div style={{color:text >= 0? 'green' : 'red'}}>
-                        <span>{(text/60).toFixed(1)}</span>
+                        <span>{(text/60).toFixed(2)}</span>
                     </div>
                 );
             },
@@ -541,7 +550,7 @@ class contractManager extends React.Component{
             render: (text, record, index) => {
                 return(
                     <div style={{color:text >= 0? 'green' : 'red'}}>
-                        <span>{(text/60).toFixed(1)}</span>
+                        <span>{(text/60).toFixed(2)}</span>
                     </div>
                 );
             },

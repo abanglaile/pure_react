@@ -6,6 +6,7 @@ import App from '@/Component/app'
 import teacherManager from '@/Component/teacherManager'
 import groupManager from '@/Component/groupManager'
 import studentManager from '@/Component/studentManager'
+import studentInfo from '@/Component/studentInfo'
 import roomManager from '@/Component/roomManager'
 import contractManager from '@/Component/contractManager'
 
@@ -17,6 +18,7 @@ const routes = (
     <Route path="group" component={groupManager} />
     <Route path="contract" component={contractManager} />
     <Route path="student" component={studentManager} />
+    <Route path="student_info/:id" component={studentInfo}/> 
     <Route path="room" component={roomManager} />
   </Route>
 )

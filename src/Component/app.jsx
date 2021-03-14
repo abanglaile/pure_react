@@ -76,13 +76,13 @@ class App extends React.Component {
                   <span>合同管理</span>
                 </Link>
               </Menu.Item>
-              {/* <Menu.Item key="4">
+              <Menu.Item key="4">
                 <Link to='/school-zq/student'>
-                  <Icon type='user' />
+                  <Icon type='meh' />
                   <span>学生管理</span>
                 </Link>
               </Menu.Item>
-              <Menu.Item key="5">
+              {/* <Menu.Item key="5">
                 <Link to='/school-zq/room'>
                   <Icon type='user' />
                   <span>课室管理</span>

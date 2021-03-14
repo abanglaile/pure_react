@@ -8,10 +8,11 @@ const defaultManagerData = Immutable.fromJS({
 
   isFetching: false,
   schoolId: '1',
-  code: null,
   teacherData: [],
   groupData: [], 
   contractData: [],
+  studentData: [],
+  code : null,//学生邀请码
   teacher_option: [],
   course_option: [],
   consumeLesson: [],
@@ -20,6 +21,11 @@ const defaultManagerData = Immutable.fromJS({
   his_contract_list: [],
   total_fee: 0,
   total_time: 0,
+
+  student_info : {}, //学生基本信息
+  course_data: [],//学生所报课程
+  stu_pfcomment_list : [],//学生课堂表现
+  stu_kpcomment_list : [],//学生知识点表现
 })
 
 export const managerData = (state = defaultManagerData, action = {}) => {
@@ -33,12 +39,14 @@ export const managerData = (state = defaultManagerData, action = {}) => {
     case 'GET_DATA_START':
       return state.set('isFetching', true);
     case 'UPDATE_SCHOOL_ID':
-      console.log("reducer schoolId:",action.schoolId);
+      // console.log("reducer schoolId:",action.schoolId);
       return state.set('schoolId', action.schoolId)
     case 'GET_TEACHER_LIST':
       return state.set('teacherData', Immutable.fromJS(action.json)).set('isFetching', false)
     case 'GET_GROUP_TABLE':
       return state.set('groupData', Immutable.fromJS(action.json)).set('isFetching', false)
+    case 'GET_STUDENT_TABLE':
+      return state.set('studentData', Immutable.fromJS(action.json)).set('isFetching', false)
     case 'GET_GROUP_OPTION':
       return state.set('teacher_option', Immutable.fromJS(action.teacher_option))
           .set('course_option', Immutable.fromJS(action.course_option))
@@ -64,6 +72,14 @@ export const managerData = (state = defaultManagerData, action = {}) => {
             .set('total_fee', action.total_fee)
     case 'GET_STUDENT_CODE':
       return state.set('code',action.code)
+    case 'GET_STU_INFO_SUCESS':
+      return state.set('student_info', Immutable.fromJS(action.json))
+    case 'GET_STU_COURSE':
+      return state.set('course_data', Immutable.fromJS(action.json))
+    case 'GET_STU_PFCOMMENT_LIST':
+      return state.set('stu_pfcomment_list', Immutable.fromJS(action.json)).set('isFetching', false)
+    case 'GET_STU_KPCOMMENT_LIST':
+      return state.set('stu_kpcomment_list', Immutable.fromJS(action.json)).set('isFetching', false)
     default:
       return state
   }
