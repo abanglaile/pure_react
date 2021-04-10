@@ -24,6 +24,7 @@ const defaultManagerData = Immutable.fromJS({
 
   student_info : {}, //学生基本信息
   course_data: [],//学生所报课程
+  pf_label_options: [],//效能标签
   stu_pfcomment_list : [],//学生课堂表现
   stu_kpcomment_list : [],//学生知识点表现
 })
@@ -76,6 +77,8 @@ export const managerData = (state = defaultManagerData, action = {}) => {
       return state.set('student_info', Immutable.fromJS(action.json))
     case 'GET_STU_COURSE':
       return state.set('course_data', Immutable.fromJS(action.json))
+    case 'GET_PF_LABEL_OPTIONS':
+      return state.set('pf_label_options', Immutable.fromJS(action.result))
     case 'GET_STU_PFCOMMENT_LIST':
       return state.set('stu_pfcomment_list', Immutable.fromJS(action.json)).set('isFetching', false)
     case 'GET_STU_KPCOMMENT_LIST':

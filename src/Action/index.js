@@ -296,14 +296,27 @@ export const getStuCourse = (student_id) => {
   }
 }
 
-export const getStuPfCommentList = (student_id) => {
+export const getPfLabelOptions = () => {
+  let url = target + "/getPfLabelOptions";
+  return dispatch => {
+      return axios.get(url, {params: {}})
+      .then(function (response) {
+          dispatch({
+              type : 'GET_PF_LABEL_OPTIONS',
+              result: response.data, 
+          });
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
+  }
+}
+
+export const getStuPfCommentList = (student_id,filter_option) => {
   let url = target + "/getStuPfCommentList";
   return dispatch => {
       dispatch(getDataStart());
-      return axios.get(url, { 
-          params:{
-              student_id,
-      }})
+      return axios.post(url, { student_id, filter_option})
       .then(function (response) {
           dispatch({
               type : 'GET_STU_PFCOMMENT_LIST',
